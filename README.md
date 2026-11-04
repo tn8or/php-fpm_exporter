@@ -1,5 +1,11 @@
 # php-fpm_exporter
 
+> **Fork notice:** This is tn8or's maintained fork of
+> [hipages/php-fpm_exporter](https://github.com/hipages/php-fpm_exporter), kept for
+> up-to-date Go and dependencies. Metric names and flags are unchanged. Releases are
+> Linux amd64/arm64 binaries with `checksums.txt`, built by GoReleaser when a `vX.Y.Z`
+> tag is pushed. No Docker images are published from this fork.
+
 ![Test](https://github.com/hipages/php-fpm_exporter/workflows/Test/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/hipages/php-fpm_exporter)](https://goreportcard.com/report/github.com/hipages/php-fpm_exporter)
 [![GoDoc](https://godoc.org/github.com/hipages/php-fpm_exporter?status.svg)](https://godoc.org/github.com/hipages/php-fpm_exporter)
