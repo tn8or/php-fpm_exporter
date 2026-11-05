@@ -267,7 +267,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## Stargazers over time
 
-[![Stargazers over time](https://starchart.cc/hipages/php-fpm_exporter.svg)](https://starchart.cc/hipages/php-fpm_exporter)
+[![Stargazers over time](https://api.star-history.com/svg?repos=hipages/php-fpm_exporter&type=Date)](https://star-history.com/#hipages/php-fpm_exporter&Date)
 
 ## Alternatives
 
