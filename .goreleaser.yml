@@ -27,3 +27,28 @@ changelog:
   filters:
     exclude:
       - "^docs:"
+
+# Multi-arch image on GHCR (no Docker Hub). Requires a Docker daemon with buildx
+# on the runner.
+dockers_v2:
+  - id: ghcr
+    dockerfile: Dockerfile
+    images:
+      - "ghcr.io/tn8or/php-fpm_exporter"
+    tags:
+      - "{{ .Version }}"
+      - "{{ .Major }}.{{ .Minor }}"
+      - "{{ .Major }}"
+      - "latest"
+    platforms:
+      - linux/amd64
+      - linux/arm64
+    labels:
+      org.opencontainers.image.title: php-fpm_exporter
+      org.opencontainers.image.description: "A Prometheus exporter for PHP-FPM. Fork of hipages/php-fpm_exporter."
+      org.opencontainers.image.source: https://github.com/tn8or/php-fpm_exporter
+      org.opencontainers.image.url: https://github.com/tn8or/php-fpm_exporter
+      org.opencontainers.image.licenses: Apache-2.0
+      org.opencontainers.image.version: "{{ .Version }}"
+      org.opencontainers.image.revision: "{{ .FullCommit }}"
+      org.opencontainers.image.created: "{{ .Date }}"
