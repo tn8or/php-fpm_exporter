@@ -1,20 +1,16 @@
 # php-fpm_exporter
 
-> **Fork notice:** This is tn8or's maintained fork of
-> [hipages/php-fpm_exporter](https://github.com/hipages/php-fpm_exporter), kept for
-> up-to-date Go and dependencies. Metric names and flags are unchanged. Releases are
-> Linux amd64/arm64 binaries with `checksums.txt`, built by GoReleaser when a `vX.Y.Z`
-> tag is pushed. No Docker images are published from this fork.
+> **This is a fork.** `tn8or/php-fpm_exporter` is a maintained fork of
+> [hipages/php-fpm_exporter](https://github.com/hipages/php-fpm_exporter), created by
+> [Enrico Stahn](https://github.com/estahn) and published by [hipages](https://github.com/hipages)
+> with the [contributors listed below](#contributors). All credit for the exporter itself goes to
+> them. Upstream's last release was v2.2.0 (May 2022); this fork exists only to keep the Go
+> toolchain and dependencies current. Metric names, labels and flags are unchanged.
+> See [Changes in this fork](#changes-in-this-fork). Licensed under Apache-2.0 like the original.
 
-![Test](https://github.com/hipages/php-fpm_exporter/workflows/Test/badge.svg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/hipages/php-fpm_exporter)](https://goreportcard.com/report/github.com/hipages/php-fpm_exporter)
-[![GoDoc](https://godoc.org/github.com/hipages/php-fpm_exporter?status.svg)](https://godoc.org/github.com/hipages/php-fpm_exporter)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hipages_php-fpm_exporter&metric=alert_status)](https://sonarcloud.io/dashboard?id=hipages_php-fpm_exporter)
-[![Docker Pulls](https://img.shields.io/docker/pulls/hipages/php-fpm_exporter.svg)](https://hub.docker.com/r/hipages/php-fpm_exporter/)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/hipages/php-fpm_exporter.svg)](http://isitmaintained.com/project/hipages/php-fpm_exporter "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/hipages/php-fpm_exporter.svg)](http://isitmaintained.com/project/hipages/php-fpm_exporter "Percentage of issues still open")
-[![Open Source Helpers](https://www.codetriage.com/hipages/php-fpm_exporter/badges/users.svg)](https://www.codetriage.com/hipages/php-fpm_exporter)
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
+[![Test](https://github.com/tn8or/php-fpm_exporter/actions/workflows/test.yml/badge.svg)](https://github.com/tn8or/php-fpm_exporter/actions/workflows/test.yml)
+[![Release](https://img.shields.io/github/v/release/tn8or/php-fpm_exporter)](https://github.com/tn8or/php-fpm_exporter/releases)
+[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors)
 
 A [prometheus](https://prometheus.io/) exporter for PHP-FPM.
 The exporter connects directly to PHP-FPM and exports the metrics via HTTP.
@@ -25,6 +21,7 @@ A webserver such as NGINX or Apache is **NOT** needed!
 
 <!-- toc -->
 
+- [Changes in this fork](#changes-in-this-fork)
 - [Features](#features)
 - [Usage](#usage)
   * [Options and defaults](#options-and-defaults)
@@ -43,6 +40,18 @@ A webserver such as NGINX or Apache is **NOT** needed!
 
 <!-- tocstop -->
 
+## Changes in this fork
+
+Relative to upstream [v2.2.0](https://github.com/hipages/php-fpm_exporter/releases/tag/v2.2.0) / `master`:
+
+* Current Go toolchain and all Go module dependencies updated.
+* Release pipeline replaced: GoReleaser v2 on tag push only, Linux amd64/arm64 binaries,
+  `checksums.txt`, and multi-arch images on GHCR. No Docker Hub images, no Windows/macOS builds.
+* CI workflows replaced with read-only, SHA-pinned workflows (upstream's
+  `pull_request_target` and auto-approve/auto-merge workflows removed).
+
+The Go module path is still `github.com/hipages/php-fpm_exporter`, so upstream changes merge cleanly.
+
 ## Features
 
 * Export single or multiple pools
@@ -54,7 +63,16 @@ A webserver such as NGINX or Apache is **NOT** needed!
 
 ## Usage
 
-`php-fpm_exporter` is released as [binary](https://github.com/hipages/php-fpm_exporter/releases) and [docker](https://hub.docker.com/r/hipages/php-fpm_exporter/) image.
+`php-fpm_exporter` is released as [binaries](https://github.com/tn8or/php-fpm_exporter/releases) (Linux amd64/arm64, verify with `checksums.txt`) and as a multi-arch [container image](https://github.com/tn8or/php-fpm_exporter/pkgs/container/php-fpm_exporter) `ghcr.io/tn8or/php-fpm_exporter` (tags `X.Y.Z`, `X.Y`, `X`, `latest`).
+To download and verify a release binary:
+
+```
+VERSION=2.3.0 ARCH=amd64
+curl -fsSLO https://github.com/tn8or/php-fpm_exporter/releases/download/v${VERSION}/php-fpm_exporter_${VERSION}_linux_${ARCH}
+curl -fsSLO https://github.com/tn8or/php-fpm_exporter/releases/download/v${VERSION}/checksums.txt
+sha256sum --check --ignore-missing checksums.txt
+```
+
 It uses sensible defaults which usually avoids the need to use command parameters or environment variables.
 
 `php-fpm_exporter` supports 2 commands, `get` and `server`.
@@ -114,13 +132,13 @@ If you like to have a more granular reporting please use `phpfpm_process_state`.
 
 * Run docker manually
   ```
-  docker pull hipages/php-fpm_exporter
-  docker run -it --rm -e PHP_FPM_SCRAPE_URI="tcp://127.0.0.1:9000/status,tcp://127.0.0.1:9001/status" hipages/php-fpm_exporter
+  docker pull ghcr.io/tn8or/php-fpm_exporter
+  docker run -it --rm -e PHP_FPM_SCRAPE_URI="tcp://127.0.0.1:9000/status,tcp://127.0.0.1:9001/status" ghcr.io/tn8or/php-fpm_exporter
   ```
 
 * Run the docker-compose example
   ```
-  git clone git@github.com:hipages/php-fpm_exporter.git
+  git clone git@github.com:tn8or/php-fpm_exporter.git
   cd php-fpm_exporter/test
   docker-compose -p php-fpm_exporter up
   ```
@@ -211,15 +229,13 @@ make test-e2e
 
 ## Contributing
 
-Contributions are greatly appreciated.
-The maintainers actively manage the issues list, and try to highlight issues suitable for newcomers.
-The project follows the typical GitHub pull request model.
-See " [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/) " for more details.
-Before starting any work, please either comment on an existing issue, or file a new one.
+This fork only tracks toolchain and dependency updates. Feature changes and bug fixes are best
+proposed [upstream](https://github.com/hipages/php-fpm_exporter) so everyone benefits; we will
+merge upstream changes into this fork.
 
 ## Contributors
 
-Thanks goes to these wonderful people ([emoji key](https://github.com/all-contributors/all-contributors#emoji-key)):
+The original authors and contributors of [hipages/php-fpm_exporter](https://github.com/hipages/php-fpm_exporter). Thanks goes to these wonderful people ([emoji key](https://github.com/all-contributors/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->

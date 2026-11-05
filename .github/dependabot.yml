@@ -11,3 +11,9 @@ updates:
     target-branch: "master"
     schedule:
       interval: "monthly"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    target-branch: "master"
+    schedule:
+      interval: "monthly"
