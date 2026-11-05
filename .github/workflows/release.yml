@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: php-fpm-exporter
     permissions:
       contents: write # create the GitHub release and upload binaries
     steps:
