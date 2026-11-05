@@ -147,7 +147,7 @@ If you like to have a more granular reporting please use `phpfpm_process_state`.
   * Prometheus: http://127.0.0.1:9090/
   * php-fpm_exporter metrics: http://127.0.0.1:9253/metrics
 
-  [![asciicast](https://asciinema.org/a/1msR8nqAsFdHzROosUb7PiHvf.png)](https://asciinema.org/a/1msR8nqAsFdHzROosUb7PiHvf)
+  [![asciicast](https://asciinema.org/a/1msR8nqAsFdHzROosUb7PiHvf.svg)](https://asciinema.org/a/1msR8nqAsFdHzROosUb7PiHvf)
 
 ### Kubernetes Example
 
@@ -264,10 +264,6 @@ The original authors and contributors of [hipages/php-fpm_exporter](https://gith
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-## Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/hipages/php-fpm_exporter.svg)](https://starchart.cc/hipages/php-fpm_exporter)
 
 ## Alternatives
 
