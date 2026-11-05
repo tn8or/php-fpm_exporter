@@ -64,6 +64,15 @@ The Go module path is still `github.com/hipages/php-fpm_exporter`, so upstream c
 ## Usage
 
 `php-fpm_exporter` is released as [binaries](https://github.com/tn8or/php-fpm_exporter/releases) (Linux amd64/arm64, verify with `checksums.txt`) and as a multi-arch [container image](https://github.com/tn8or/php-fpm_exporter/pkgs/container/php-fpm_exporter) `ghcr.io/tn8or/php-fpm_exporter` (tags `X.Y.Z`, `X.Y`, `X`, `latest`).
+To download and verify a release binary:
+
+```
+VERSION=2.3.0 ARCH=amd64
+curl -fsSLO https://github.com/tn8or/php-fpm_exporter/releases/download/v${VERSION}/php-fpm_exporter_${VERSION}_linux_${ARCH}
+curl -fsSLO https://github.com/tn8or/php-fpm_exporter/releases/download/v${VERSION}/checksums.txt
+sha256sum --check --ignore-missing checksums.txt
+```
+
 It uses sensible defaults which usually avoids the need to use command parameters or environment variables.
 
 `php-fpm_exporter` supports 2 commands, `get` and `server`.
